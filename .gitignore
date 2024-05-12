@@ -1,0 +1,4 @@
+*.o
+game
+Main2.c_bak
+result
