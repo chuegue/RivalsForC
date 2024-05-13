@@ -19,3 +19,4 @@ struct SDLContext{
 
 struct SDLContext client_SDL_context_init(unsigned int WindowWidth, unsigned int WindowHeight);
 int client_init_server_connection(const char *ip, uint16_t port);
+void client_main_game_loop(int client_fd);

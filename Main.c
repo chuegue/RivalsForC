@@ -20,6 +20,8 @@ void server(){
 
 void client(){
 	printf("Starting client side!\n");
+	int client_fd = client_init_server_connection("127.0.0.1", 6969);
+	client_main_game_loop(client_fd);
 #if GRAPHICAL
 	struct SDLContext sdl_context = client_SDL_context_init(800,600);	
 	TTF_Init();

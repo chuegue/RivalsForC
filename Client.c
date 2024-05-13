@@ -50,4 +50,23 @@ int _read_to_completion_client(int fd, char *buffer, size_t count){
 	}
 }
 	
- 
+int client_message_is_present(int fd){
+	fd_set readfds;
+	FD_ZERO(&readfds);
+	FD_SET(fd, &readfds);
+	struct timeval tv = {.tv_sec=0, .tv_usec=0};
+	return select(fd + 1, &readfds, NULL, NULL, &tv) == 1; 
+}
+
+void client_main_game_loop(int client_fd){
+	char buffer[2048] = {0};
+	while(1){
+		if(client_message_is_present(client_fd)){
+			if(read(client_fd, buffer, 2047) == -1){
+				fprintf(stderr, "Error reading message from server.\n\n");
+				exit(EXIT_FAILURE);
+			}
+			printf("Message from server:\n%s", buffer);
+		}	
+	}
+}	
