@@ -62,11 +62,15 @@ void client_main_game_loop(int client_fd){
 	char buffer[2048] = {0};
 	while(1){
 		if(client_message_is_present(client_fd)){
-			if(read(client_fd, buffer, 2047) == -1){
+			int readret = read(client_fd, buffer, 2047); 
+			if(readret == -1){
 				fprintf(stderr, "Error reading message from server.\n\n");
 				exit(EXIT_FAILURE);
+			} else if(readret == 0){
+				fprintf(stderr, "Server went bye bye. Bye!\n");
+				exit(EXIT_FAILURE);
 			}
-			printf("Message from server:\n%s", buffer);
+			printf("%s", buffer);
 		}	
 	}
 }	

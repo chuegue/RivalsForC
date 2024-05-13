@@ -142,20 +142,21 @@ void game_backend_init_game(int player1_fd, int player2_fd, PlayerBoard *player1
 	char *player2_serialized = game_serialize_player_board(player2_board);
 	//printf("\n\nPlayer 1:\n%s\n\nPlayer 2:\n%s\n", player1_serialized, player2_serialized);
 	char init_game_message[2048] = {0};	
-	sprintf(init_game_message, "You have been paired up! You are the Blue player.\nYour board is: %s\n", player1_serialized);
+	sprintf(init_game_message, "[PLAIN]You have been paired up! You are the Blue player. Your board is:\n[BOARD]%s\n", player1_serialized);
 	fd_set writefds;
 	FD_ZERO(&writefds);
 	FD_SET(player1_fd, &writefds);
-	while(select(player1_fd + 1, NULL, &writefds, NULL, NULL) != 1);
+	struct timeval tv = {0, 0};
+	while(select(player1_fd + 1, NULL, &writefds, NULL, &tv) != 1);
 	if(write(player1_fd, init_game_message, strlen(init_game_message) + 1) == -1){
 		fprintf(stderr, "Error sending message to client.\n\n");
 		exit(EXIT_FAILURE);
 	}
 
-	sprintf(init_game_message, "You have been paired up! You are the Red player.\nYour board is: %s\n", player2_serialized);
+	sprintf(init_game_message, "[PLAIN]You have been paired up! You are the Red player. Your board is:\n[BOARD]%s\n", player2_serialized);
 	FD_ZERO(&writefds);
 	FD_SET(player2_fd, &writefds);
-	while(select(player2_fd + 1, NULL, &writefds, NULL, NULL) != 1);
+	while(select(player2_fd + 1, NULL, &writefds, NULL, &tv) != 1);
 	if(write(player2_fd, init_game_message, strlen(init_game_message) + 1) == -1){
 		fprintf(stderr, "Error sending message to client.\n\n");
 		exit(EXIT_FAILURE);

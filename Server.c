@@ -94,7 +94,7 @@ void server_main_accept_loop(int server_fd, uint16_t port){
 				fprintf(stderr, "Error accepting new connection.\n\n");
 				exit(EXIT_FAILURE);
 			}
-			char greet_message[] = "Welcome to Rivals for Catan!\n";
+			char greet_message[] = "[PLAIN]Welcome to Rivals for Catan!\n";
 			if(_write_to_completion_server(new_fd, greet_message, sizeof(greet_message)) < 0){
 				fprintf(stderr, "Error writing to new connection.\n\n");
 				exit(EXIT_FAILURE);
