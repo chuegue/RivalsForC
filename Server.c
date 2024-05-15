@@ -1,6 +1,15 @@
 #include "Server.h"
 #include "Game_Backend.h"
 #include "DA.h"
+#include <netinet/in.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <sys/socket.h>
+#include <unistd.h>
+#include <asm/socket.h>
+#include <arpa/inet.h>
+#include <sys/time.h>
 
 int server_init_listen_socket(uint16_t port){
 	int server_fd = socket(AF_INET, SOCK_STREAM, 0); 

@@ -1,14 +1,4 @@
 #include <SDL2/SDL.h>
-#include <SDL2/SDL_ttf.h>
-#include <netinet/in.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <stdint.h>
-#include <sys/socket.h>
-#include <unistd.h>
-#include <asm/socket.h>
-#include <arpa/inet.h>
-#include <sys/time.h>
 
 #define COLOR_FMT(COL) (COL)>>24 & 0xFF,(COL)>>16 & 0xFF,(COL)>>8 & 0xFF,(COL)>>0 & 0xFF
 

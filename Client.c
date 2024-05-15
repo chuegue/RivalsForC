@@ -1,4 +1,14 @@
 #include "Client.h"
+#include <SDL2/SDL_ttf.h>
+#include <netinet/in.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdint.h>
+#include <sys/socket.h>
+#include <unistd.h>
+#include <asm/socket.h>
+#include <arpa/inet.h>
+#include <sys/time.h>
 
 struct SDLContext client_SDL_context_init(unsigned int WindowWidth, unsigned int WindowHeight){
     struct SDLContext new;
